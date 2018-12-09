@@ -1,4 +1,4 @@
-Hello my name is Ashot Galstyan .I am from Armenia,Yerevan (COORRDIANTES 40.177200, 44.503490).
+Hello my name is Ashot Galstyan .I am from Armenia,Yerevan.
 It`s my first Face Recognition.
 
 
