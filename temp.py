@@ -3,10 +3,27 @@ import os
 import numpy as np
 cap = cv2.VideoCapture(0)
 
-data_path = 'C:/Users/ASUS/Desktop/DF/images/'
+data_path = 'C:/Users/ASUS/Desktop/face_recognition/images/'
 onlyfiles = os.listdir(data_path)
 
 Training_Data, Labels = [],[]
+
+if onlyfiles == []: 
+    name = input("Input your name: ")
+    path = 'C:/Users/ASUS/Desktop/face_recognition/images/'+name+"/"
+    os.mkdir(path)    
+    i = 0
+    while i <= 30:
+        ret, frame = cap.read()
+        face_xml = cv2.CascadeClassifier('face.xml')
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_xml.detectMultiScale(gray, 1.3, 15)
+        if len(faces)==1:
+            for (x,y,w,h) in faces:
+                cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+                roi_color = gray[y:y+h, x:x+w]
+                cv2.imwrite(os.path.join(path, str(i) + ".jpg"), roi_color)
+        i+=1
 
 
 for i, files in enumerate(onlyfiles):
@@ -29,7 +46,7 @@ def nothing(x):
 def reg(frame):
     
     name = input("Input your name: ")
-    path = 'C:/Users/ASUS/Desktop/DF/images/'+name+"/"
+    path = 'C:/Users/ASUS/Desktop/face_recognition/images/'+name+"/"
     os.mkdir(path)    
     i = 0
     while i <= 30:
@@ -61,7 +78,6 @@ while (True):
         else:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             cv2.putText(frame, "Undefined", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
-    frame = cv2.resize(frame, (1000,500))
     cv2.imshow('frame',frame)
     if cv2.waitKey(33) == ord('a'):
         reg(frame)
