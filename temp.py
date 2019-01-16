@@ -3,7 +3,16 @@ import os
 import numpy as np
 cap = cv2.VideoCapture(0)
 
-os.mkdir(images)
+d = os.listdir('C:/Users/ASUS/Desktop/face_recognition/')
+
+a = True 
+for i in d:
+    if i == 'images':
+        a = False
+        
+if a == True:
+    os.mkdir('images')
+
 data_path = 'C:/Users/ASUS/Desktop/face_recognition/images/'
 onlyfiles = os.listdir(data_path)
 
