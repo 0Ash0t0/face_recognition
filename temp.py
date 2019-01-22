@@ -1,9 +1,9 @@
 import cv2
 import os
 import numpy as np
-cap = cv2.VideoCapture(0)
-
-d = os.listdir('C:/Users/ASUS/Desktop/face_recognition/')
+cap = cv2.VideoCapture(-1)
+directory = 'C:/Users/ASUS/Desktop/face_recognition/'
+d = os.listdir(directory)
 
 a = True 
 for i in d:
@@ -13,14 +13,14 @@ for i in d:
 if a == True:
     os.mkdir('images')
 
-data_path = 'C:/Users/ASUS/Desktop/face_recognition/images/'
+data_path = directory + 'images/'
 onlyfiles = os.listdir(data_path)
 
 Training_Data, Labels = [],[]
 
 if onlyfiles == []: 
     name = input("Input your name: ")
-    path = 'C:/Users/ASUS/Desktop/face_recognition/images/'+name+"/"
+    path = data_path + name + "/"
     os.mkdir(path)    
     i = 0
     while i <= 30:
@@ -56,7 +56,7 @@ def nothing(x):
 def reg(frame):
     
     name = input("Input your name: ")
-    path = 'C:/Users/ASUS/Desktop/face_recognition/images/'+name+"/"
+    path = data_path + name + "/"
     os.mkdir(path)    
     i = 0
     while i <= 30:
@@ -87,7 +87,7 @@ while (True):
             cv2.putText(frame, name, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
         else:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-            cv2.putText(frame, "Undefined", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
+            cv2.putText(frame, "Unknown", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
     cv2.imshow('frame',frame)
     if cv2.waitKey(33) == ord('a'):
         reg(frame)

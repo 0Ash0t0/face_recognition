@@ -5,16 +5,15 @@ It`s my first Face Recognition.
 Steps.
 
 1.Install OpenCV
-2.Change data_path(line-6)
-3.Change path(line-32)
-4.For add new face press "a" on keybord(!!!!YOU CAN ADD NEW FACE WEHN IN VIDEO ONLY ONE FACE!!!!)
-5.After add new face restart kernel(alt + .)
+2.Change directory(line-5)
+3.For add new face press "a" on keybord(!!!!YOU CAN ADD NEW FACE WEHN IN VIDEO ONLY ONE FACE!!!!)
+4.After add new face restart kernel(alt + .)
 If you add your face and restart kernel but writing "Undefined"
-6.Change 40 !!No above 60!!(line57)
+5.Change 40 !!No above 60!!(line57)
 
 
 Contacts:
-Facebook:https://www.facebook.com/ash.galstyan.999?ref=bookmarks
+Facebook:https://www.facebook.com/ash.galstyan.999
 Gmail:ashot.galstyan.76@gmail.org
 
 
