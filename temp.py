@@ -1,7 +1,7 @@
 import cv2
 import os
 import numpy as np
-cap = cv2.VideoCapture(-1)
+cap = cv2.VideoCapture(0)
 directory = 'C:/Users/ASUS/Desktop/face_recognition/'
 d = os.listdir(directory)
 
