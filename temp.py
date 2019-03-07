@@ -2,9 +2,9 @@ import cv2
 import os
 import numpy as np
 cap = cv2.VideoCapture(0)
-directory = 'C:/Users/ASUS/Desktop/face_recognition/'
+directory = '/Users/user/Desktop/face_recognition/'
 d = os.listdir(directory)
-
+sname = ""
 a = True 
 for i in d:
     if i == 'images':
@@ -20,10 +20,18 @@ Training_Data, Labels = [],[]
 
 if onlyfiles == []: 
     name = input("Input your name: ")
-    path = data_path + name + "/"
+    sname = ""
+    for names in onlyfiles:
+        if name == names:
+            while sname == "":
+                sname = input("Input your surname: ")
+    if sname == "":
+        path = data_path + name + "/"
+    else:
+        path = data_path + name + " " + sname + "/"
     os.mkdir(path)    
     i = 0
-    while i <= 30:
+    while i <= 45:
         ret, frame = cap.read()
         face_xml = cv2.CascadeClassifier('face.xml')
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -56,10 +64,18 @@ def nothing(x):
 def reg(frame):
     
     name = input("Input your name: ")
-    path = data_path + name + "/"
+    sname = ""
+    for names in onlyfiles:
+        if name == names:
+            while sname == "":
+                sname = input("Input your surname: ")
+    if sname == "":
+        path = data_path + name + "/"
+    else:
+        path = data_path + name + " " + sname + "/"
     os.mkdir(path)    
     i = 0
-    while i <= 30:
+    while i <= 45:
         ret, frame = cap.read()
         face_xml = cv2.CascadeClassifier('face.xml')
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
@@ -84,7 +100,10 @@ while (True):
         if lab[1] < 40:
             name=onlyfiles[lab[0]]
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-            cv2.putText(frame, name, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
+            if sname == "": 
+                cv2.putText(frame, name, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
+            else:
+                cv2.putText(frame, name + " " + sname, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
         else:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             cv2.putText(frame, "Unknown", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
