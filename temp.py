@@ -2,11 +2,13 @@ import cv2
 import os
 import numpy as np
 cap = cv2.VideoCapture(0)
-directory = '/Users/user/Desktop/face_recognition/'
-d = os.listdir(directory)
-sname = ""
+
+directory = os.path.abspath('1')[:-1] 
+
+# directory = '/Users/user/Desktop/face_recognition/'
+dirlist = os.listdir(directory)
 a = True 
-for i in d:
+for i in dirlist:
     if i == 'images':
         a = False
         
@@ -19,16 +21,10 @@ onlyfiles = os.listdir(data_path)
 Training_Data, Labels = [],[]
 
 if onlyfiles == []: 
-    name = input("Input your name: ")
-    sname = ""
-    for names in onlyfiles:
-        if name == names:
-            while sname == "":
-                sname = input("Input your surname: ")
-    if sname == "":
-        path = data_path + name + "/"
-    else:
-        path = data_path + name + " " + sname + "/"
+    name = raw_input("Input your name: ")
+
+    path = data_path + name + "/"
+   
     os.mkdir(path)    
     i = 0
     while i <= 45:
@@ -63,16 +59,8 @@ def nothing(x):
   pass
 def reg(frame):
     
-    name = input("Input your name: ")
-    sname = ""
-    for names in onlyfiles:
-        if name == names:
-            while sname == "":
-                sname = input("Input your surname: ")
-    if sname == "":
-        path = data_path + name + "/"
-    else:
-        path = data_path + name + " " + sname + "/"
+    name = raw_input("Input your name: ")
+    path = data_path + name + "/"
     os.mkdir(path)    
     i = 0
     while i <= 45:
@@ -87,9 +75,7 @@ def reg(frame):
                 cv2.imwrite(os.path.join(path, str(i) + ".jpg"), roi_color)
         i+=1
 
-while (True):
-    
-    
+while (True): 
     ret, frame = cap.read()
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     face_cascade = cv2.CascadeClassifier('face.xml')
@@ -100,10 +86,7 @@ while (True):
         if lab[1] < 40:
             name=onlyfiles[lab[0]]
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
-            if sname == "": 
-                cv2.putText(frame, name, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
-            else:
-                cv2.putText(frame, name + " " + sname, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
+            cv2.putText(frame, name, (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
         else:
             cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
             cv2.putText(frame, "Unknown", (x, y), cv2.FONT_HERSHEY_SIMPLEX, 1.0, (255, 255, 255), lineType=cv2.LINE_AA)
